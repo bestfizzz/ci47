@@ -29,3 +29,6 @@
     align-items: center;
     margin-top: 10px;
 }
+.name-wrapper .input-wrapper{
+    width: 48%;
+}
