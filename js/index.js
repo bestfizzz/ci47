@@ -11,5 +11,23 @@ window.onload=()=>{
       };
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
-    view.setActiveScreen('registerPage')
+    console.log(firebase.app())
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        model.currentUser={
+          displayName:user.displayName,
+          email:user.email
+        }
+        if(user.emailVerified){
+          view.setActiveScreen('chatPage')
+        }else{
+          alert('Pleas')
+          firebase.auth().signOut()
+          view.setActiveScreen('loginPage')
+        }
+      }else{
+        view.setActiveScreen('registerPage')
+      }
+    })
 }
+

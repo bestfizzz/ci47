@@ -14,20 +14,19 @@ model.register=async(data)=>{
 }
 model.login=async({email,password})=>{
     try{
-        const response=await firebase.auth().signInWithEmailAndPassword(email,password)
-        console.log(response)
-        if(response && response.user.emailVerified){
-            model.currentUser={
-                email:response.user.email,
-                displayName:response.user.displayName
-            }
-        view.setActiveScreen('chatPage')
-        }else{
-            alert('Please verify your email')
-        }
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        // console.log(response)
+        // if(response && response.user.emailVerified){
+        //     model.currentUser={
+        //         email:response.user.email,
+        //         displayName:response.user.displayName
+        //     }
+        // view.setActiveScreen('chatPage')
+        // }else{
+        //     alert('Please verify your email')
+        // }
     }catch(err){
         alert(err.message)
         console.log(err)
     }
-    
 }

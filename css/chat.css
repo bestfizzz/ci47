@@ -1,0 +1,66 @@
+.header{
+    background-color: #007cfd;
+    text-align: center;
+    height: 40px;
+    font-size:23px;
+    color: #fff;
+}
+.chat-container .conversation-title{
+    background-color: #fff;
+    text-align: center;
+    height: 40px;
+    font-size:20px;
+    color: black;
+    border-bottom:1px solid rgb(100, 98, 98);
+}
+
+.chat-container{
+    height: 100vh;
+}
+.chat-container .main{
+    height: calc(100vh - 64px);
+}
+.chat-container .conversation-detail{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.chat-container .list-messages{
+    flex-grow: 1;
+}
+.chat-container #send-message-form{
+    position: relative;
+}
+#send-message-form button{
+    position: absolute;
+    right: 10px;
+    top: 23px;
+}
+#send-message-form .input-wrapper{
+    margin: 0;
+}
+#send-message-form .input-wrapper input{
+    padding: 22px 20px;
+}
+.list-messages .message .content{
+    width: max-content;
+    padding: 4px 8px;
+    border-radius: 4px;
+    max-width: 45%;
+}
+.list-messages .message.mine .content{
+    background-color: #007cfd;
+    color: #fff;
+    margin-bottom:10px ;
+}
+.list-messages .message.mine{
+    display: flex;
+    justify-content: flex-end;
+}
+.list-messages .message.their .content{
+    background-color: #ddbbdd;
+    margin-bottom:10px;
+}
+.chat-container .list-messages{
+    padding: 10px;
+}

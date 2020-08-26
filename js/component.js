@@ -53,6 +53,24 @@ component.loginPage=`
     `
 component.chatPage=`
 <div class="chat-container">
-    <div id="username"></div>   
+<div class="chat-container">
+<div class="header">
+    minchat
+</div>
+<div class="main">
+    <div class="conversation-detail">
+        <div class="conversation-title">First conversation</div>
+        <div class="list-messages">
+
+        </div>
+        <form action="submit" id="send-message-form">
+            <div class="input-wrapper">
+            <input type="text" placeholder="Type a message" name="message"></input>
+            </div>
+            <button><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+</div>
+</div> 
+</div>
 </div> 
 `

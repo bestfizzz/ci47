@@ -36,9 +36,40 @@ view.setActiveScreen=(screenName)=>{
         break;
         case 'chatPage':
             document.getElementById('app').innerHTML=component.chatPage
-            document.getElementById('username').innerHTML='Welcome '+''+firebase.auth().currentUser.displayName
+            const sendMessageForm=document.getElementById('send-message-form')
+            sendMessageForm.addEventListener('submit',(e)=>{
+                e.preventDefault()
+                const message={
+                    content:sendMessageForm.message.value,
+                    owner:model.currentUser.email
+                }
+                const messageFromBot={
+                    content:sendMessageForm.message.value,
+                    owner:'bot'
+                }
+                view.addMessage(message)
+                view.addMessage(messageFromBot)
+            })
             break;
     }
 }
 view.setErrorMessage=(elementId,context)=>{
     document.getElementById(elementId).innerText=context}
+view.addMessage=(message)=>{
+    if(!(message.content==='')){
+        const messageWrapper=document.createElement('div')
+        messageWrapper.classList.add('message')
+        if(message.owner===model.currentUser.email){
+            messageWrapper.classList.add('mine')
+            messageWrapper.innerHTML=`
+            <div class="content">${message.content}</div>
+            `
+        }else{
+            messageWrapper.classList.add('their')
+            messageWrapper.innerHTML=`
+            <div class="owner">${message.owner}</div>
+            <div class="content">${message.content}</div>
+            `
+        }
+        document.querySelector('.list-messages').appendChild(messageWrapper)}
+}
