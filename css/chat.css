@@ -33,8 +33,12 @@
 }
 #send-message-form button{
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 23px;
+    border: none;
+    background: transparent;
+    color: #007cfd;
+    font-size: 1.5rem;
 }
 #send-message-form .input-wrapper{
     margin: 0;
@@ -63,4 +67,8 @@
 }
 .chat-container .list-messages{
     padding: 10px;
+    overflow-y: auto;
+}
+.list-messages .content{
+    word-break: break-all;
 }

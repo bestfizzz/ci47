@@ -11,7 +11,6 @@ window.onload=()=>{
       };
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
-    console.log(firebase.app())
     firebase.auth().onAuthStateChanged((user)=>{
       if(user){
         model.currentUser={
@@ -29,5 +28,49 @@ window.onload=()=>{
         view.setActiveScreen('registerPage')
       }
     })
+    // templateFirestore()
 }
-
+const templateFirestore= async()=>{
+  // get one
+  const docID='zsv1RueYHweTcjpNhFrw'
+  const response=await firebase.firestore().collection('users').doc(docID).get()
+  // const user =getOneDocument(response)
+  // get many
+  const responseMany=await firebase.firestore().collection('users').where('phone','==','098').get()
+  // console.log(responseMany)
+  const firstUser=responseMany
+  // console.log(getManyDocument(firstUser))
+  //create
+  const dataToCreate={
+    age:100,
+    name:'abc'
+  }
+  // firebase.firestore().collection('users').add(dataToCreate)
+  //update
+  const idToUpdate='cVDLo5h4mb52T6Lvg0jS'
+  const dataToUpdate={
+    name:'Updated',
+    phone:firebase.firestore.FieldValue.arrayUnion('098')
+  }
+  firebase.firestore().collection('users').doc(idToUpdate).update(dataToUpdate)
+  //delete
+  const idToDelete='zsv1RueYHweTcjpNhFrw'
+  firebase.firestore().collection('users').doc(idToDelete).delete()
+}
+const getOneDocument=(response)=>{
+  const data=response.data()
+  data.id=response.id
+  return data
+}
+const getManyDocument=(response)=>{
+  const listData=[]
+  for(const doc of response.docs){
+    listData.push(getOneDocument(doc))
+  }
+  return listData
+}
+// const mess=async()=>{
+//   const messageSend=await firebase.firestore().collection('conversations').doc('Lhumtg7LGVmaElqWwIYF').get()
+//   console.log(getOneDocument(messageSend))
+//   view.addMessage(getOneDocument(messageSend))
+// }

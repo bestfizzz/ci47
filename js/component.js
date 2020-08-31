@@ -67,7 +67,7 @@ component.chatPage=`
             <div class="input-wrapper">
             <input type="text" placeholder="Type a message" name="message"></input>
             </div>
-            <button><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+            <button class=''><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
         </form>
 </div>
 </div> 
