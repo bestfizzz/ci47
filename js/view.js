@@ -49,10 +49,29 @@ view.setActiveScreen = (screenName) => {
                     sendMessageForm.message.value = ''
                 }
             })
+            document.getElementById('create-conversation').addEventListener('click', () => {
+                view.setActiveScreen('createConversation')
+            })
             model.getConversations()
             model.listenConversationChange()
             break;
-    }
+        case 'createConversation':
+            document.getElementById('app').innerHTML = component.createConversation
+            const createConversationForm = document.getElementById('create-conversation-form')
+            createConversationForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+                const data={
+                    title:createConversationForm.title.value,
+                    email:createConversationForm.email.value,
+                    createdAt:new Date().toISOString()
+                }
+                controler.createConversation(data);
+            })
+            document.getElementById('redirect-to-chat').addEventListener('click', () => {
+                view.setActiveScreen('chatPage')
+            })
+            break;
+}
 }
 view.setErrorMessage = (elementId, context) => {
     document.getElementById(elementId).innerText = context
@@ -75,12 +94,41 @@ view.addMessage = (message) => {
     document.querySelector('.list-messages').appendChild(messageWrapper)
 }
 view.showCurrentConversation = () => {
+    document.querySelector('.conversation-title').innerHTML = model.currentConversation.title
+    document.querySelector('.list-messages').innerHTML = ''
     for (message of model.currentConversation.messages) {
         view.addMessage(message)
     }
     view.scrollToEndElement()
 }
-view.scrollToEndElement=()=>{
-    const element=document.querySelector('.list-messages')
-    element.scrollTop=element.scrollHeight
+view.scrollToEndElement = () => {
+    const element = document.querySelector('.list-messages')
+    element.scrollTop = element.scrollHeight
+}
+view.showConversations = () => {
+    for (conversation of model.conversations) {
+        // console.log(model.conversations);
+        view.addConversation(conversation)
+    }
+}
+view.addConversation = (conversation) => {
+    const conversationWrapper = document.createElement('div')
+    conversationWrapper.classList.add('conversation')
+    conversationWrapper.classList.add('cursor-pointer')
+    if (conversation.id === model.currentConversation.id) {
+        conversationWrapper.classList.add('current')
+    }
+    conversationWrapper.innerHTML = `
+    <div class="conversation cursor-pointer">
+        <div class="left-conversation-title">${conversation.title}</div>
+        <div class="num-of-user">${conversation.users.length} users</div>
+    </div>
+    `
+    conversationWrapper.addEventListener('click', () => {
+        model.currentConversation = conversation
+        view.showCurrentConversation()
+        document.querySelector('.conversation.current').classList.remove('current')
+        conversationWrapper.classList.add('current')
+    })
+    document.querySelector('.list-conversations').appendChild(conversationWrapper)
 }

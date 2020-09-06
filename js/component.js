@@ -53,13 +53,20 @@ component.loginPage=`
     `
 component.chatPage=`
 <div class="chat-container">
-<div class="chat-container">
 <div class="header">
     minchat
 </div>
 <div class="main">
+<div class="aside-left">
+<div class="create-conversations">
+    <button class="btn cursor-pointer" id="create-conversation">=>New conversation</button>
+</div>
+<div class="list-conversations">
+    
+</div>
+</div>
     <div class="conversation-detail">
-        <div class="conversation-title">First conversation</div>
+        <div class="conversation-title"></div>
         <div class="list-messages">
 
         </div>
@@ -74,3 +81,20 @@ component.chatPage=`
 </div>
 </div> 
 `
+component.createConversation=`
+<div class="create-conversation-wrapper">
+        <div class="header">chat</div>
+        <form id="create-conversation-form" style="width: 60%;margin: auto;margin-top:20px;">
+            <h4>Create a new conversation</h4>
+            <div class="input-wrapper">
+                <input type="text" placeholder="Conversation title" name="title">
+                <div class="error" id="create-conversation-title-error"></div>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" placeholder="Conversation email" name="email">
+                <div class="error" id="create-conversation-email-error"></div>
+            </div>
+            <button class="btn">Save</button>
+            <button class="btn btn-bg-right" type="button" id="redirect-to-chat">Cancel</button>
+        </form>
+    </div>`

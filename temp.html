@@ -9,30 +9,21 @@
     <link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
-<div class="chat-container">
-        <div class="header">
-            minchat
-        </div>
-        <div class="main">
-            <div class="conversation-detail">
-                <div class="conversation-title">First conversation</div>
-                <div class="list-messages">
-                    <div class="message mine">
-                        <div class="content">Hello world</div>
-                    </div>
-                    <div class="message their">
-                        <div class="owner">abc@gmail.com</div>
-                        <div class="content">Hello world</div>
-                    </div>
-                </div>
-                <form action="submit" id="send-message-form">
-                    <div class="input-wrapper">
-                    <input type="text" placeholder="Type a message" name="message"></input>
-                    </div>
-                    <button>send</button>
-                </form>
-        </div>
-    </div> 
-</div>
+    <div class="create-conversation-wrapper">
+        <div class="header">chat</div>
+        <form id="create-conversation-form" style="width: 60%;margin: auto;margin-top:20px;">
+            <h4>Create a new conversation</h4>
+            <div class="input-wrapper">
+                <input type="text" placeholder="Conversation title" name="title">
+                <div class="error" id="create-conversation-title-error"></div>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" placeholder="Conversation email" name="title">
+                <div class="error" id="create-conversation-email-error"></div>
+            </div>
+            <button class="btn">Save</button>
+            <button class="btn btn-bg-right" type="button" id="redirect-to-chat">Cancel</button>
+        </form>
+    </div>
 </body>
 </html>

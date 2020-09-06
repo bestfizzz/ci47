@@ -45,7 +45,7 @@ const templateFirestore= async()=>{
     age:100,
     name:'abc'
   }
-  // firebase.firestore().collection('users').add(dataToCreate)
+  // firebase.firestore().collection('users').add(dataToCreate) 
   //update
   const idToUpdate='cVDLo5h4mb52T6Lvg0jS'
   const dataToUpdate={

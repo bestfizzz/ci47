@@ -1,4 +1,5 @@
 const model = {}
+firstTime=true
 model.currentUser = undefined
 model.conversations = []
 model.currentConversation = undefined
@@ -35,9 +36,11 @@ model.login = async ({ email, password }) => {
 model.getConversations = async () => {
     const response = await firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).get()
     model.conversations = getManyDocument(response)
+    // console.log(model.conversations);
     if (model.conversations.length > 0) {
         model.currentConversation = model.conversations[0]
         view.showCurrentConversation()
+        view.showConversations()
     }
 }
 model.addMessage = (message) => {
@@ -47,12 +50,12 @@ model.addMessage = (message) => {
     firebase.firestore().collection('conversations').doc(model.currentConversation.id).update(dataToUpdate)
 }
 model.listenConversationChange = () => {
-    // let firstTime=true
-    // if(firstTime===true){
-    //     firstTime=false
-    //     return
-    // }
+
     firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).onSnapshot((snapshot) => {
+        if(firstTime===true){
+            firstTime=false
+            return
+        }
         for (oneChange of snapshot.docChanges()){
             const docData=getOneDocument(oneChange.doc)
             if(docData.id===model.currentConversation.id){
@@ -60,7 +63,17 @@ model.listenConversationChange = () => {
                 view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length-1])
                 view.scrollToEndElement()
             }
+            for(let i=0;i<model.conversations.length;i++){
+                if(model.conversations[i].id===docData.id){
+                    model.conversations[i]=docData
+                }
+            }
         }
+
     }
     )
+}
+model.createConversation=(dataToCreate)=>{
+    console.log(dataToCreate);
+    firebase.firestore().collection('conversations').add(dataToCreate) 
 }

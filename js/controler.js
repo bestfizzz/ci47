@@ -40,8 +40,7 @@ controler.register = (data) => {
     }
     else { view.setErrorMessage('confirm-password-error', "") }
     if (data.firstName !== '' && data.lastName !== '' && data.email !== '' && data.password !== '' && data.password === data.confirmPassword) {
-        model.register(data)
-        console.log(123);
+        model.register(data);
     }
 }
 controler.login = ({ email, password }) => {
@@ -49,5 +48,17 @@ controler.login = ({ email, password }) => {
     view.setErrorMessage('password-error', password === '' ? 'Please input your password' : '')
     if (email !== '' && password !== '') {
         model.login({email, password})
+    }
+}
+controler.createConversation=(data)=> {
+    view.setErrorMessage('create-conversation-title-error', data.title === '' ? 'Please input your title' : '')
+    view.setErrorMessage('create-conversation-email-error', data.email === '' ? 'Please input your email' : '')
+    if(data.email !== '' && data.title !== '') {
+        const dataToCreate={
+            title:data.title,
+            email:data.email,
+            createdAt:new Date().toISOString()
+        }
+        model.createConversation(dataToCreate)
     }
 }
