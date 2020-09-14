@@ -26,6 +26,11 @@
 .error{
     color:rgb(216,15,15,1)
 }
-.btn-bg-right{
-    background: gray;
+.btn-bg-light{
+    background:transparent;
+    color: black;
+}
+.mt-1{
+    margin-top: 1rem !important;
+    
 }

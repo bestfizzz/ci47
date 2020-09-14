@@ -1,5 +1,5 @@
 const model = {}
-firstTime=true
+firstTime = true
 model.currentUser = undefined
 model.conversations = []
 model.currentConversation = undefined
@@ -52,28 +52,55 @@ model.addMessage = (message) => {
 model.listenConversationChange = () => {
 
     firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).onSnapshot((snapshot) => {
-        if(firstTime===true){
-            firstTime=false
+        if (firstTime === true) {
+            firstTime = false
             return
         }
-        for (oneChange of snapshot.docChanges()){
-            const docData=getOneDocument(oneChange.doc)
-            if(docData.id===model.currentConversation.id){
-                model.currentConversation=docData
-                view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length-1])
-                view.scrollToEndElement()
-            }
-            for(let i=0;i<model.conversations.length;i++){
-                if(model.conversations[i].id===docData.id){
-                    model.conversations[i]=docData
+        for (oneChange of snapshot.docChanges()) {
+            const docData = getOneDocument(oneChange.doc)
+            if (oneChange.type === 'modified') {
+                if (docData.id === model.currentConversation.id) {
+                    if (model.currentConversation.users.length !== docData.users.length) {
+                        view.addUser(docData.users[docData.users.length - 1])
+                        view.addUserInConversation(docData.users.length)
+                    } else {
+                        view.addMessage(docData.messages[docData.messages.length - 1])
+                        view.scrollToEndElement()
+                    }
+                    model.currentConversation = docData
                 }
+                for (let i = 0; i < model.conversations.length; i++) {
+                    if (model.conversations[i].id === docData.id) {
+                        model.conversations[i] = docData
+                    }
+                }
+                if(docData.messages[docData.messages.length-1].owner!==model.currentConversation.email){
+                }else{
+                view.showNotification(docData.id)}
+            }
+            if (oneChange.type === 'added') {
+                model.conversations.push(docData)
+                view.addConversation(docData)
             }
         }
 
     }
     )
 }
-model.createConversation=(dataToCreate)=>{
-    console.log(dataToCreate);
-    firebase.firestore().collection('conversations').add(dataToCreate) 
+model.createConversation = (data) => {
+    // console.log(dataToCreate);
+    const dataToCreate = {
+        title: data.title,
+        createdAt: new Date().toISOString(),
+        messages: [],
+        users: [data.email, model.currentUser.email]
+    }
+    firebase.firestore().collection('conversations').add(dataToCreate)
+    view.setActiveScreen('chatPage', true)
+}
+model.addUser = (email) => {
+    const dataToUpdate = {
+        users: firebase.firestore.FieldValue.arrayUnion(email)
+    }
+    firebase.firestore().collection('conversations').doc(model.currentConversation.id).update(dataToUpdate)
 }

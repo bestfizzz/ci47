@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,22 +9,46 @@
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/chat.css">
 </head>
+
 <body>
-    <div class="create-conversation-wrapper">
-        <div class="header">chat</div>
-        <form id="create-conversation-form" style="width: 60%;margin: auto;margin-top:20px;">
-            <h4>Create a new conversation</h4>
-            <div class="input-wrapper">
-                <input type="text" placeholder="Conversation title" name="title">
-                <div class="error" id="create-conversation-title-error"></div>
+    <div class="chat-container">
+        <div class="header">
+            minchat
+        </div>
+        <div class="main">
+            <div class="aside-left">
+                <div class="create-conversations">
+                    <button class="btn cursor-pointer" id="create-conversation">=>New conversation</button>
+                </div>
+                <div class="list-conversations">
+
+                </div>
             </div>
-            <div class="input-wrapper">
-                <input type="text" placeholder="Conversation email" name="title">
-                <div class="error" id="create-conversation-email-error"></div>
+            <div class="conversation-detail">
+                <div class="conversation-title"></div>
+                <div class="list-messages">
+
+                </div>
+                <form action="submit" id="send-message-form">
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="Type a message" name="message"></input>
+                    </div>
+                    <button class=''><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                </form>
             </div>
-            <button class="btn">Save</button>
-            <button class="btn btn-bg-right" type="button" id="redirect-to-chat">Cancel</button>
-        </form>
+            <div class="aside-right">
+                <div class="list-users">
+                </div>
+                <form class="mt-1" id="add-user-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="email" placeholder="Friend email">
+                        <div class="error" id="email-error"></div>
+                    </div>
+                    <button class="btn">Add</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>

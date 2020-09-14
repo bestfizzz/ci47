@@ -47,18 +47,19 @@ controler.login = ({ email, password }) => {
     view.setErrorMessage('email-error', email === '' ? 'Please input your email' : '')
     view.setErrorMessage('password-error', password === '' ? 'Please input your password' : '')
     if (email !== '' && password !== '') {
-        model.login({email, password})
+        model.login({ email, password })
     }
 }
-controler.createConversation=(data)=> {
-    view.setErrorMessage('create-conversation-title-error', data.title === '' ? 'Please input your title' : '')
-    view.setErrorMessage('create-conversation-email-error', data.email === '' ? 'Please input your email' : '')
-    if(data.email !== '' && data.title !== '') {
-        const dataToCreate={
-            title:data.title,
-            email:data.email,
-            createdAt:new Date().toISOString()
-        }
-        model.createConversation(dataToCreate)
+controler.createConversation = (data) => {
+    view.setErrorMessage('create-conversation-title-error', data.title.trim() === '' ? 'Please input your title' : '')
+    view.setErrorMessage('create-conversation-email-error', data.email.trim() === '' ? 'Please input your email' : '')
+    if (data.email !== '' && data.title !== '') {
+        model.createConversation(data)
+    }
+}
+controler.addUser=(email)=>{
+    view.setErrorMessage('email-error', email.trim() === '' ? 'Please input your email' : '')
+    if (email!== '') {
+        model.addUser(email)
     }
 }

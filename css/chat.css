@@ -25,7 +25,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    width: 85%;
+    width: 70%;
 }
 .chat-container .list-messages{
     flex-grow: 1;
@@ -89,7 +89,65 @@
 }
 .chat-container .aside-left .list-conversations .conversation{
     padding:10px;
+    position: relative;
 }
 .chat-container .aside-left .list-conversations .conversation.current{
     background: #dbdbdb;
+}
+.chat-container .aside-right{
+    border-left: 1px solid #dbdbdb;
+    width: 15%;
+    padding:10px;
+}
+.chat-container .aside-right .user-email{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-container .notification{  
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: blue;
+    border-radius:50% ;
+    top: 15px;
+    right: 10px;
+    display: none;
+}
+@media screen and (max-width:768px){
+    .aside-right{
+        display: none;
+    }
+    .chat-container .conversation-detail{
+        width: 85%;
+    }
+    .num-of-user{
+        display: none;
+    }
+    .chat-container .aside-left .list-conversations .conversation:first-child{
+        margin-top: 10px;
+    }
+    .chat-container .aside-left .list-conversations .conversation{
+        height: 64px;
+        width: 64%;
+        border-radius: 50%;
+        padding: 0;
+        border: 1px solid #dbdbdb;
+        text-align: center;
+        line-height: 64px;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+}
+@media screen and (max-width:576px){
+    .chat-container .aside-left .list-conversations .conversation{
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+    }
+    .chat-container .notification{
+        width: 12px;
+        height: 12px;
+        top: 12px;
+        right: 4px;
+    }
 }

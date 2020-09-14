@@ -77,11 +77,21 @@ component.chatPage=`
             <button class=''><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
         </form>
 </div>
-</div> 
+<div class="aside-right">
+                <div class="list-users">
+                </div>
+                <form class="mt-1" id="add-user-form">
+                    <div class="input-wrapper">
+                        <input type="text" name="email" placeholder="Friend email">
+                        <div class="error" id="email-error"></div>
+                    </div>
+                    <button class="btn">Add</button>
+                </form>
+            </div> 
 </div>
-</div> 
+</div>
 `
-component.createConversation=`
+component.createConversationPage=`
 <div class="create-conversation-wrapper">
         <div class="header">chat</div>
         <form id="create-conversation-form" style="width: 60%;margin: auto;margin-top:20px;">
@@ -95,6 +105,6 @@ component.createConversation=`
                 <div class="error" id="create-conversation-email-error"></div>
             </div>
             <button class="btn">Save</button>
-            <button class="btn btn-bg-right" type="button" id="redirect-to-chat">Cancel</button>
+            <button class="btn btn-bg-light" type="button" id="redirect-to-chat">Cancel</button>
         </form>
     </div>`
